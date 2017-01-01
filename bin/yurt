@@ -102,7 +102,7 @@ class PathRelativeFrom
   require 'pathname'
 
   # FIXME: Only transform paths that are in $SBOX
-  def self.relative_from(to_path, from_path)
+  def self.call(to_path, from_path)
     to_pathname = Pathname.new(File.expand_path(to_path))
     from_pathname = Pathname.new(File.expand_path(from_path))
 
@@ -168,7 +168,7 @@ class RegenCommand
       command << File.basename($0)
 
       if options.data
-        data = PathRelativeFrom.relative_from(options.data, output_dir)
+        data = PathRelativeFrom.call(options.data, output_dir)
         command << "--data '#{data}'"
       end
 
@@ -179,7 +179,7 @@ class RegenCommand
       # FIXME: Include the --output option?
 
       command << ARGV
-        .map { |x| PathRelativeFrom.relative_from(x, output_dir) }
+        .map { |x| PathRelativeFrom.call(x, output_dir) }
         .map { |x| "'#{x}'" }
 
       command.join(' ')
