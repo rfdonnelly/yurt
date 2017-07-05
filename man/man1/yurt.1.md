@@ -30,7 +30,7 @@ template.
 Template (`template.erb`) contents:
 
 ```ruby
-# <%= generate_comment =>
+# <%= generate_comment %>
 ...
 ```
 
